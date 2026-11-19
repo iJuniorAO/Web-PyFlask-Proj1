@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexusTech | Converse Conosco</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="home" class="brand">
+        <span class="brand-icon">&lt;/&gt;</span>
+        <span>Nexus<span style="color: var(--primary);">Tech</span></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="home">Home</a></li>
+          <li><a href="contato">Contatos</a></li>
+          <li><a href="faleconosco" class="active">Converse Conosco</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge">ATENDIMENTO INTELIGENTE</span>
+          <h1 class="section-title">Converse <span class="gradient-text">Conosco</span></h1>
+          <p class="section-subtitle">
+            Envie os detalhes do seu desafio técnico pelo formulário ou tire dúvidas imediatas com o assistente virtual Nexus AI.
+          </p>
+        </div>
+
+        <div class="talk-grid">
+          <!-- Formulário -->
+          <form class="form-card" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nome">Nome Completo *</label>
+                <input type="text" id="nome" placeholder="Ex: Ana Silva" required />
+                <div class="error-msg" id="nomeError">Informe seu nome completo.</div>
+              </div>
+
+              <div class="form-group">
+                <label for="email">E-mail Corporativo *</label>
+                <input type="email" id="email" placeholder="ana@empresa.com.br" required />
+                <div class="error-msg" id="emailError">Digite um e-mail válido.</div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="empresa">Empresa / Organização</label>
+                <input type="text" id="empresa" placeholder="Nome da empresa" />
+              </div>
+
+              <div class="form-group">
+                <label for="assunto">Área de Interesse</label>
+                <select id="assunto">
+                  <option value="Inteligência Artificial">Inteligência Artificial</option>
+                  <option value="Cloud & DevOps">Cloud & DevOps</option>
+                  <option value="Engenharia Full-Stack">Engenharia Full-Stack</option>
+                  <option value="Cibersegurança">Cibersegurança</option>
+                  <option value="Consultoria Geral">Consultoria Geral</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="mensagem">Detalhes do Projeto *</label>
+              <textarea id="mensagem" rows="5" maxlength="500" placeholder="Descreva objetivos, prazos ou integrações necessárias..." required></textarea>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="error-msg" id="mensagemError">Escreva pelo menos 15 caracteres.</div>
+                <div class="char-counter"><span id="charCount">0</span>/500</div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Solicitação Técnica</button>
+          </form>
+
+          <!-- Assistente Virtual -->
+          <aside class="chat-card">
+            <div class="chat-header">
+              <div class="bot-avatar">AI</div>
+              <div>
+                <div style="font-weight: 700; font-size: 0.95rem;">Nexus AI Assistant</div>
+                <div style="font-size: 0.78rem; color: var(--accent);">● Online — Resposta instantânea</div>
+              </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+              <div class="msg bot">
+                Olá! Sou o assistente da NexusTech. Como posso ajudar hoje? Escolha uma opção rápida abaixo ou digite sua pergunta.
+              </div>
+            </div>
+
+            <div class="quick-replies">
+              <button type="button" class="quick-btn" onclick="sendQuick('Prazos de entrega')">⏱️ Prazos</button>
+              <button type="button" class="quick-btn" onclick="sendQuick('Tecnologias usadas')">💻 Stack Tech</button>
+              <button type="button" class="quick-btn" onclick="sendQuick('Solicitar orçamento')">💰 Orçamento</button>
+            </div>
+
+            <div class="chat-input-box">
+              <input type="text" id="chatInput" placeholder="Pergunte sobre prazos, IA, cloud..." />
+              <button type="button" class="btn btn-primary" style="padding: 0.65rem 1rem;" onclick="handleChatSend()">Enviar</button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast">Mensagem enviada com sucesso!</div>
+
+  <footer>
+    <div class="container footer-content">
+      <span>© 2026 NexusTech Engenharia Digital. Todos os direitos reservados.</span>
+      <span style="font-family: var(--font-mono); font-size: 0.8rem;">Status: <strong style="color: var(--accent);">Todos os sistemas operacionais</strong></span>
+    </div>
+  </footer>
+
+  <script>
+    // Menu Mobile
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+    // Preencher assunto automaticamente se vier da Home (?assunto=...)
+    const params = new URLSearchParams(window.location.search);
+    const assuntoParam = params.get('assunto');
+    if (assuntoParam) {
+      const select = document.getElementById('assunto');
+      for (const option of select.options) {
+        if (option.value === assuntoParam) {
+          select.value = assuntoParam;
+          break;
+        }
+      }
+    }
+
+    // Contador de caracteres
+    const mensagemInput = document.getElementById('mensagem');
+    const charCount = document.getElementById('charCount');
+    mensagemInput.addEventListener('input', () => {
+      charCount.textContent = mensagemInput.value.length;
+    });
+
+    // Validação e Envio do Formulário
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let valid = true;
+
+      const nome = document.getElementById('nome');
+      const email = document.getElementById('email');
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (nome.value.trim().length < 3) {
+        nome.classList.add('invalid');
+        document.getElementById('nomeError').style.display = 'block';
+        valid = false;
+      } else {
+        nome.classList.remove('invalid');
+        document.getElementById('nomeError').style.display = 'none';
+      }
+
+      if (!emailRegex.test(email.value.trim())) {
+        email.classList.add('invalid');
+        document.getElementById('emailError').style.display = 'block';
+        valid = false;
+      } else {
+        email.classList.remove('invalid');
+        document.getElementById('emailError').style.display = 'none';
+      }
+
+      if (mensagemInput.value.trim().length < 15) {
+        mensagemInput.classList.add('invalid');
+        document.getElementById('mensagemError').style.display = 'block';
+        valid = false;
+      } else {
+        mensagemInput.classList.remove('invalid');
+        document.getElementById('mensagemError').style.display = 'none';
+      }
+
+      if (valid) {
+        const toast = document.getElementById('toast');
+        toast.textContent = `Solicitação sobre "${document.getElementById('assunto').value}" enviada! Retornaremos em até 2h.`;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3500);
+        form.reset();
+        charCount.textContent = '0';
+      }
+    });
+
+    // Assistente Virtual
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+
+    function appendMessage(text, sender) {
+      const div = document.createElement('div');
+      div.className = `msg ${sender}`;
+      div.textContent = text;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function getBotReply(text) {
+      const q = text.toLowerCase();
+      if (q.includes('prazo')) return 'MVPs e protótipos funcionais levam de 2 a 4 semanas. Projetos corporativos completos variam entre 6 e 12 semanas com entregas semanais.';
+      if (q.includes('stack') || q.includes('tecnologia')) return 'Trabalhamos com Python, Node.js, React, PostgreSQL/Supabase, Docker, Kubernetes e modelos de IA integrados via API.';
+      if (q.includes('orçamento') || q.includes('preço') || q.includes('valor')) return 'Nossos projetos são orçados por escopo fechado ou squad dedicado. Preencha o formulário ao lado para receber uma proposta em até 24h.';
+      return 'Entendi! Um especialista da nossa engenharia pode analisar esse cenário detalhadamente. Se quiser, envie os detalhes no formulário ao lado.';
+    }
+
+    function sendQuick(topic) {
+      appendMessage(topic, 'user');
+      setTimeout(() => appendMessage(getBotReply(topic), 'bot'), 450);
+    }
+
+    function handleChatSend() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      appendMessage(text, 'user');
+      chatInput.value = '';
+      setTimeout(() => appendMessage(getBotReply(text), 'bot'), 450);
+    }
+
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') handleChatSend();
+    });
+  </script>
+</body>
+</html>

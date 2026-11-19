@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexusTech | Contatos & Hubs Regionais</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="home" class="brand">
+        <span class="brand-icon">&lt;/&gt;</span>
+        <span>Nexus<span style="color: var(--primary);">Tech</span></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="home">Home</a></li>
+          <li><a href="contato" class="active">Contatos</a></li>
+          <li><a href="faleconosco">Converse Conosco</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge">CANAIS OFICIAIS</span>
+          <h1 class="section-title">Conecte-se diretamente com <span class="gradient-text">nossa equipe</span></h1>
+          <p class="section-subtitle">
+            Escolha o canal mais rápido para suporte técnico, parcerias comerciais ou visitas aos nossos centros de operação.
+          </p>
+        </div>
+
+        <div class="contacts-grid">
+          <div class="glass-card">
+            <div>
+              <div class="card-icon">✉️</div>
+              <h3>E-mail Corporativo</h3>
+              <p>Para propostas técnicas, RFPs e documentação de projetos.</p>
+              <div class="contact-value">contato@nexustech.com.br</div>
+            </div>
+            <button class="copy-btn" onclick="copyContact('contato@nexustech.com.br')">Copiar e-mail</button>
+          </div>
+
+          <div class="glass-card">
+            <div>
+              <div class="card-icon">📱</div>
+              <h3>WhatsApp & Comercial</h3>
+              <p>Atendimento ágil de segunda a sexta, das 08h às 19h.</p>
+              <div class="contact-value">+55 (31) 99842-7100</div>
+            </div>
+            <button class="copy-btn" onclick="copyContact('+55 (31) 99842-7100')">Copiar telefone</button>
+          </div>
+
+          <div class="glass-card">
+            <div>
+              <div class="card-icon">🚨</div>
+              <h3>NOC / Suporte 24/7</h3>
+              <p>Linha dedicada para incidentes críticos de clientes com SLA ativo.</p>
+              <div class="contact-value">noc@nexustech.com.br</div>
+            </div>
+            <button class="copy-btn" onclick="copyContact('noc@nexustech.com.br')">Copiar suporte</button>
+          </div>
+        </div>
+
+        <!-- Seletor Interativo de Hubs -->
+        <div class="hub-box">
+          <div>
+            <div class="hub-tabs">
+              <button class="hub-tab active" onclick="selectHub('bh', this)">Hub Belo Horizonte</button>
+              <button class="hub-tab" onclick="selectHub('sp', this)">Hub São Paulo</button>
+            </div>
+            <h3 id="hubTitle" style="font-size: 1.35rem; margin-bottom: 0.6rem;">Centro de Engenharia — BH / Contagem</h3>
+            <p id="hubAddress" style="color: var(--text-muted); margin-bottom: 1rem;">
+              Av. Raja Gabaglia, 2000 — Torre Tech, 14º Andar, Belo Horizonte - MG
+            </p>
+            <p id="hubHours" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent);">
+              ● Operação presencial & híbrida | Seg a Sex: 08:30 - 18:30
+            </p>
+          </div>
+
+          <div class="radar-map">
+            <div class="radar-pin"></div>
+            <strong id="radarCity" style="font-family: var(--font-mono); color: var(--primary);">LAT -19.9562° | LON -43.9581°</strong>
+            <span id="radarLabel" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;">
+              Data Center & Laboratório de IA — Minas Gerais
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast">Copiado para a área de transferência!</div>
+
+  <footer>
+    <div class="container footer-content">
+      <span>© 2026 NexusTech Engenharia Digital. Todos os direitos reservados.</span>
+      <span style="font-family: var(--font-mono); font-size: 0.8rem;">Status: <strong style="color: var(--accent);">Todos os sistemas operacionais</strong></span>
+    </div>
+  </footer>
+
+  <script>
+    // Menu Mobile
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+    // Copiar Contato
+    function copyContact(text) {
+      navigator.clipboard.writeText(text);
+      const toast = document.getElementById('toast');
+      toast.textContent = `Copiado: ${text}`;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+
+    // Alternar Hubs
+    const hubs = {
+      bh: {
+        title: 'Centro de Engenharia — BH / Contagem',
+        address: 'Av. Raja Gabaglia, 2000 — Torre Tech, 14º Andar, Belo Horizonte - MG',
+        hours: '● Operação presencial & híbrida | Seg a Sex: 08:30 - 18:30',
+        coords: 'LAT -19.9562° | LON -43.9581°',
+        label: 'Data Center & Laboratório de IA — Minas Gerais'
+      },
+      sp: {
+        title: 'Escritório Executivo — São Paulo',
+        address: 'Av. Brigadeiro Faria Lima, 3477 — Itaim Bibi, São Paulo - SP',
+        hours: '● Atendimento corporativo & reuniões | Seg a Sex: 09:00 - 19:00',
+        coords: 'LAT -23.5868° | LON -46.6822°',
+        label: 'Hub Financeiro & Arquitetura Cloud — São Paulo'
+      }
+    };
+
+    function selectHub(key, btn) {
+      document.querySelectorAll('.hub-tab').forEach(tab => tab.classList.remove('active'));
+      btn.classList.add('active');
+      const data = hubs[key];
+      document.getElementById('hubTitle').textContent = data.title;
+      document.getElementById('hubAddress').textContent = data.address;
+      document.getElementById('hubHours').textContent = data.hours;
+      document.getElementById('radarCity').textContent = data.coords;
+      document.getElementById('radarLabel').textContent = data.label;
+    }
+  </script>
+</body>
+</html>

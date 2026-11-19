@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexusTech | Home — Engenharia & Inovação Digital</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="home" class="brand">
+        <span class="brand-icon">&lt;/&gt;</span>
+        <span>Nexus<span style="color: var(--primary);">Tech</span></span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="home" class="active">Home</a></li>
+          <li><a href="contato">Contatos</a></li>
+          <li><a href="faleconosco">Converse Conosco</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="badge">
+            <span class="pulse-dot"></span>
+            SISTEMAS EM NUVEM & IA DE ALTA PERFORMANCE
+          </span>
+          <h1>
+            Construímos o futuro da <span class="gradient-text">tecnologia escalável</span> para o seu negócio.
+          </h1>
+          <p>
+            Arquitetura moderna, automação inteligente e engenharia de software sob medida para transformar dados e ideias em produtos digitais de alta disponibilidade.
+          </p>
+          <div class="hero-actions">
+            <a href="faleConosco.html" class="btn btn-primary">Iniciar Projeto →</a>
+            <a href="contatos.html" class="btn btn-outline">Canais Diretos</a>
+          </div>
+
+          <div class="hero-stats">
+            <div>
+              <div class="stat-value">99.98%</div>
+              <div class="stat-label">Uptime Garantido</div>
+            </div>
+            <div>
+              <div class="stat-value">+140</div>
+              <div class="stat-label">Sistemas Entregues</div>
+            </div>
+            <div>
+              <div class="stat-value">&lt; 35ms</div>
+              <div class="stat-label">Latência Média API</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Painel de Telemetria em Tempo Real -->
+        <div class="telemetry-card">
+          <div class="terminal-top">
+            <div class="window-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="terminal-tag">● CLUSTER_PROD_BR-01 ONLINE</span>
+          </div>
+
+          <div class="metric-row">
+            <div class="metric-info">
+              <span>Processamento Neural IA</span>
+              <span id="cpuVal">68%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="cpuBar" style="width: 68%;"></div>
+            </div>
+          </div>
+
+          <div class="metric-row">
+            <div class="metric-info">
+              <span>Throughput API Gateway</span>
+              <span id="apiVal">84%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="apiBar" style="width: 84%;"></div>
+            </div>
+          </div>
+
+          <div class="metric-row">
+            <div class="metric-info">
+              <span>Segurança Zero-Trust</span>
+              <span style="color: var(--accent);">100% ATIVO</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 100%; background: var(--accent);"></div>
+            </div>
+          </div>
+
+          <div class="live-log" id="liveLog">
+            <p><span>[23:01:12]</span> Deploy automatizado concluído sem downtime.</p>
+            <p><span>[23:01:45]</span> Modelo preditivo sincronizado com base SQL.</p>
+            <p><span>[23:02:10]</span> Firewall WAF bloqueou 0 ameaças críticas.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Soluções -->
+      <div class="container">
+        <div class="services-grid">
+          <article class="glass-card">
+            <div>
+              <div class="card-icon">🤖</div>
+              <h3>Inteligência Artificial</h3>
+              <p>Agentes autônomos, análise preditiva e integração com modelos generativos aplicados aos processos internos da sua empresa.</p>
+            </div>
+            <a href="faleConosco.html?assunto=Inteligência Artificial" class="card-link">Solicitar escopo →</a>
+          </article>
+
+          <article class="glass-card">
+            <div>
+              <div class="card-icon">☁️</div>
+              <h3>Cloud & DevOps</h3>
+              <p>Infraestrutura resiliente, pipelines CI/CD, contêineres e monitoramento contínuo para operações críticas sem interrupções.</p>
+            </div>
+            <a href="faleConosco.html?assunto=Cloud & DevOps" class="card-link">Solicitar escopo →</a>
+          </article>
+
+          <article class="glass-card">
+            <div>
+              <div class="card-icon">⚡</div>
+              <h3>Engenharia Full-Stack</h3>
+              <p>Aplicações web modernas, dashboards analíticos em tempo real e APIs de alta velocidade focadas em experiência do usuário.</p>
+            </div>
+            <a href="faleConosco.html?assunto=Engenharia Full-Stack" class="card-link">Solicitar escopo →</a>
+          </article>
+
+          <article class="glass-card">
+            <div>
+              <div class="card-icon">🛡️</div>
+              <h3>Cibersegurança</h3>
+              <p>Auditoria de vulnerabilidades, criptografia ponta a ponta, controle de acesso baseado em papéis e conformidade LGPD.</p>
+            </div>
+            <a href="faleConosco.html?assunto=Cibersegurança" class="card-link">Solicitar escopo →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <span>© 2026 NexusTech Engenharia Digital. Todos os direitos reservados.</span>
+      <span style="font-family: var(--font-mono); font-size: 0.8rem;">Status: <strong style="color: var(--accent);">Todos os sistemas operacionais</strong></span>
+    </div>
+  </footer>
+
+  <script>
+    // Menu Mobile
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+    // Telemetria Dinâmica Simulada
+    setInterval(() => {
+      const cpu = Math.floor(Math.random() * (82 - 54 + 1)) + 54;
+      const api = Math.floor(Math.random() * (94 - 72 + 1)) + 72;
+      document.getElementById('cpuVal').textContent = cpu + '%';
+      document.getElementById('cpuBar').style.width = cpu + '%';
+      document.getElementById('apiVal').textContent = api + '%';
+      document.getElementById('apiBar').style.width = api + '%';
+    }, 2800);
+  </script>
+</body>
+</html>
